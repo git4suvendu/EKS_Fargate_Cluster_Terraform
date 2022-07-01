@@ -2,7 +2,7 @@
 environment                  =  "testing"
 user_profile                 =  "AWS_741032333307_User"
 user_os                      =  "windows"
-cluster_name                 =  "acn-eks-clstr"
+cluster_name                 =  "sm-eks-clstr"
 cluster_version              =  "1.22"
 cluster_type                 =  "eks"
 cluster_group                =  "eks-fargate"
@@ -16,6 +16,5 @@ availability_zones_private   =  ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
 cidr_block_internet_gw       =  "0.0.0.0/0"
 cidr_block_nat_gw            =  "0.0.0.0/0"
 fargate_app_namespace        =  ["ns-fargate-app", "ns-fargate-app2"]
-aws_access_key               = "ENTER-YOUR-ACCESS-KEY-HERE"
-aws_secret_key               = "ENTER-YOUR-SECRET-KEY-HERE"
+github_runner_base_path      = "/home/runner/"
 
