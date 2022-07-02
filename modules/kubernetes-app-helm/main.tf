@@ -36,6 +36,8 @@ resource "helm_release" "game_app" {
   atomic     = true
   timeout    = 900
   cleanup_on_fail = true
+  force_update = true
+  recreate_pods = true
 }
 
 
@@ -50,6 +52,8 @@ resource "helm_release" "game_app_ingress" {
   atomic     = true
   timeout    = 900
   cleanup_on_fail = true
+  force_update = true
+  recreate_pods = true
 
 
   depends_on = [helm_release.game_app]
