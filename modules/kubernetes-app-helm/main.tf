@@ -86,21 +86,21 @@ resource "helm_release" "game_app_full" {
     set {
       name = "replicaCount"
       value = 6
-      type =  auto
+      type =  "auto"
     }
     set {
       name = "service.name"
       value = "game-app-full-service"
-      type =  string
+      type =  "string"
     }
     set {
       name = "ingress.name"
       value = "game-app-full-ingress"
-      type =  string
+      type =  "string"
     }
     set {
       name = "image.repository"
       value = "public.ecr.aws/l6m2t8p7/docker-2048:latest"
-      type =  string
+      type =  "string"
     }
 }
