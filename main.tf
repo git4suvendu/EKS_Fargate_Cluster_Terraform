@@ -64,6 +64,14 @@ module "eks_kubernetes_addons" {
   k8s_cluster_name = module.eks.eks_cluster_name
   depends_on = [module.aws_alb_controller]
 }
+
+module "kubernetes_app_helm" {
+    source                      =  "./modules/kubernetes-app-helm"
+#    app_namespace               =  var.fargate_app_namespace[0]
+
+  depends_on = [module.eks, module.aws_alb_controller]
+}
+
 #
 /*
 module "kubernetes_app" {
