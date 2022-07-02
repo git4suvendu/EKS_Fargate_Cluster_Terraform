@@ -89,18 +89,18 @@ resource "helm_release" "game_app_full" {
       type =  "auto"
     }
     set {
-      name = "service.name"
-      value = "game-app-full-service"
-      type =  "string"
-    }
-    set {
       name = "ingress.name"
       value = "game-app-full-ingress"
       type =  "string"
     }
     set {
       name = "image.repository"
-      value = "public.ecr.aws/l6m2t8p7/docker-2048:latest"
+      value = "public.ecr.aws/l6m2t8p7/docker-2048"
+      type =  "string"
+    }
+  set {
+      name = "image.tag"
+      value = "latest"
       type =  "string"
     }
 }
