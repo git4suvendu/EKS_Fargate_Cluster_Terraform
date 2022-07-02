@@ -43,4 +43,9 @@ resource "helm_release" "game_app_ingress" {
   atomic     = true
   timeout    = 900
   cleanup_on_fail = true
+
+
+  depends_on = [helm_release.game_app]
 }
+
+
