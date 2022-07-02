@@ -16,17 +16,18 @@ locals {
   application_helm_repo  = "https://git4suvendu.github.io/application-helm-charts/"
   game_app_chart_name    = "game-app"
   game_app_chart_version = var.game_app_chart_version
-  app_release_name = "game-app"
+  game_app_release_name = "game-app-rel"
 
 
   game_app_ingress_chart_name    = "game-app-ingress"
   game_app_ingress_chart_version = var.game_app_ingress_chart_version
+  game_app_ingress_release_name = "game-app-ingress-rel"
 
 }
 
 resource "helm_release" "game_app" {
 
-  name       = local.app_release_name
+  name       = local.game_app_release_name
   repository = local.application_helm_repo
   chart      = local.game_app_chart_name
   version    = local.game_app_chart_version
@@ -40,7 +41,7 @@ resource "helm_release" "game_app" {
 
 resource "helm_release" "game_app_ingress" {
 
-  name       = local.app_release_name
+  name       = local.game_app_ingress_release_name
   repository = local.application_helm_repo
   chart      = local.game_app_chart_name
   version    = local.game_app_chart_version
