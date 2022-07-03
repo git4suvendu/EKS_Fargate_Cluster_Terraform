@@ -83,17 +83,12 @@ resource "helm_release" "game_app_full" {
   timeout    = 900
   cleanup_on_fail = true
 
-    set {
+   set {
       name = "replicaCount"
       value = 6
       type =  "auto"
     }
-    set {
-      name = "ingress.name"
-      value = "game-app-full-ingress"
-      type =  "string"
-    }
-    set {
+   set {
       name = "image.repository"
       value = "public.ecr.aws/l6m2t8p7/docker-2048"
       type =  "string"
@@ -102,5 +97,10 @@ resource "helm_release" "game_app_full" {
       name = "image.tag"
       value = "latest"
       type =  "string"
+    }
+  set {
+      name = "namespace.enabled"
+      value = "false"
+      type =  "auto"
     }
 }
