@@ -123,7 +123,7 @@ resource "helm_release" "game_app_full" {
   cleanup_on_fail = true
 
    values = [
-      "${file("helm-values-game-app-full.yaml")}"
+        file("${path.module}/helm-values-game-app-full.yaml")
   ]
 
 }
