@@ -6,7 +6,7 @@ variable "game_app_ingress_chart_version" {
 }
 
 variable "game_app_full_chart_version" {
-  default = "0.1.0"
+  default = "0.2.0"
 }
 
 variable "app_namespace" {
