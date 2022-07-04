@@ -65,7 +65,7 @@ module "eks_kubernetes_addons" {
   depends_on = [module.aws_alb_controller]
 }
 
-/*
+
 module "kubernetes_app_helm" {
     source                      =  "./modules/kubernetes-app-helm"
     app_namespace               =  var.fargate_app_namespace[0]
@@ -73,7 +73,7 @@ module "kubernetes_app_helm" {
   depends_on = [module.eks, module.aws_alb_controller]
 }
 
-
+/*
 
 #
 
