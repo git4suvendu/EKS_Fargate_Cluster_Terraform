@@ -50,21 +50,12 @@ jobs:
         with:
           file: './env-config.yaml'          # File to read from
           key-path: '["EKSConfig", "environment", "clusterName"]' # Access the runs key then the using key and retuns the value.
-      - name: Display read-yaml output
+      - name: Display Env Config YAML and Set Env variable
         run: |
             echo "Config file EKS cluster name: ${{ steps.yaml-data.outputs.data }}"
             echo "Setting Env variable with EKS cluster name...."
             echo "AWS_EKS_CLUSTER_NAME=$(echo "${{ steps.yaml-data.outputs.data }}")" >> $GITHUB_ENV
-      - name: Test
-        run: |
-          echo "Checking EKS Cluster name in env variable: ${AWS_EKS_CLUSTER_NAME}"
-      - name: Format Terraform
-        run: terraform fmt
-      - name: Terraform Init
-        id: init
-        run: |
-           rm -rf .terraform
-           terraform init
+            echo "EKS Cluster name in env variable: ${AWS_EKS_CLUSTER_NAME}"
       - name: EKS cluster Kubectl config update
         run: |
             echo "Creating Kubectl folder structure and file...."
@@ -82,6 +73,13 @@ jobs:
               echo "EKS Cluster: ${AWS_EKS_CLUSTER_NAME} is not present in ${AWS_DEFAULT_REGION}"
             fi
             cat /home/runner/.kube/config
+      - name: Format Terraform
+        run: terraform fmt
+      - name: Terraform Init
+        id: init
+        run: |
+           rm -rf .terraform
+           terraform init
       - name: Terraform Validate
         run: terraform validate
       - name: Terraform Plan
