@@ -55,9 +55,9 @@ jobs:
             echo "Config file EKS cluster name: ${{ steps.yaml-data.outputs.data }}"
             echo "Setting Env variable with EKS cluster name...."
             echo "AWS_EKS_CLUSTER_NAME=$(echo "${{ steps.yaml-data.outputs.data }}")" >> $GITHUB_ENV
-            echo "Checking EKS Cluster name in env variable: "${AWS_EKS_CLUSTER_NAME}
       - name: Test
-        run: echo $GITHUB_SHA_SHORT
+        run: |
+          echo "Checking EKS Cluster name in env variable: ${AWS_EKS_CLUSTER_NAME}"
       - name: Format Terraform
         run: terraform fmt
       - name: Terraform Init
