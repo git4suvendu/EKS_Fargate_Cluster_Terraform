@@ -51,9 +51,9 @@ jobs:
           key-path: '["EKSConfig", "environment", "clusterName"]' # Access the runs key then the using key and retuns the value.
       - name: Display Env Config YAML and Set Cluster Name Env variable
         run: |
-            echo "Config file EKS cluster name: ${{ steps.yaml-data.outputs.data }}"
+            echo "Config file EKS cluster name: ${{ steps.yaml-data-cluster-name.outputs.data }}"
             echo "Setting Env variable with EKS cluster name...."
-            echo "AWS_EKS_CLUSTER_NAME=$(echo "${{ steps.yaml-data.outputs.data }}")" >> $GITHUB_ENV
+            echo "AWS_EKS_CLUSTER_NAME=$(echo "${{ steps.yaml-data-cluster-name.outputs.data }}")" >> $GITHUB_ENV
       - name: Checking the Env variable for cluster name
         id: Test-Cluster-name-Env-Var
         run: |
@@ -66,14 +66,14 @@ jobs:
           key-path: '["EKSConfig", "environment", "clusterRegion"]' # Access the runs key then the using key and retuns the value.
       - name: Display Env Config YAML and Set Cluster Region Env variable
         run: |
-            echo "Config file EKS cluster AWS Region: ${{ steps.yaml-data.outputs.data }}"
+            echo "Config file EKS cluster AWS Region: ${{ steps.yaml-data-cluster-region.outputs.data }}"
             echo "Setting Env variable with EKS cluster AWS Region...."
-            echo "AWS_DEFAULT_REGION=$(echo "${{ steps.yaml-data.outputs.data }}")" >> $GITHUB_ENV
-      - name: Checking the Env variable for cluster aws region
+            echo "AWS_DEFAULT_REGION=$(echo "${{ steps.yaml-data-cluster-region.outputs.data }}")" >> $GITHUB_ENV
+      - name: Checking the Env variable for cluster AWS Region
         id: Test-Cluster-Region-Env-Var
         run: |
-          echo "EKS Cluster AWS region in env variable: ${AWS_DEFAULT_REGION}"
-      - name: EKS cluster Kubectl config update
+          echo "EKS Cluster AWS Region in env variable: ${AWS_DEFAULT_REGION}"
+      - name: EKS cluster Kubectl Config update
         run: |
             echo "Creating Kubectl folder structure and file...."
             mkdir /home/runner/.kube/
