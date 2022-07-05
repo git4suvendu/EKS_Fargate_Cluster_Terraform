@@ -56,9 +56,9 @@ jobs:
             echo "Setting Env variable with EKS cluster name...."
             echo "AWS_EKS_CLUSTER_NAME=$(echo "${{ steps.yaml-data.outputs.data }}")" >> $GITHUB_ENV
       - name: Checking the Env variable for cluster name
-        id: Test_Env_Var
+        id: Test-Env-Var
         run: |
-          echo "EKS Cluster name in env variable: ${{ AWS_EKS_CLUSTER_NAME }}"
+          echo "EKS Cluster name in env variable: ${AWS_EKS_CLUSTER_NAME}"
       - name: EKS cluster Kubectl config update
         run: |
             echo "Creating Kubectl folder structure and file...."
