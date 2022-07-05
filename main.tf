@@ -16,36 +16,36 @@ module "vpc" {
     cidr_block_internet_gw              =  var.cidr_block_internet_gw
 }
 
+
+
+module "eks" {
+    source                              =  "./modules/eks"
+    cluster_name                        =  var.cluster_name
+    cluster_version                     =  var.cluster_version
+    environment                         =  var.environment
+    #eks_node_group_instance_types       =  var.eks_node_group_instance_types
+    private_subnets                     =  module.vpc.aws_subnets_private
+    public_subnets                      =  module.vpc.aws_subnets_public
+    fargate_app_namespace               =  var.fargate_app_namespace
+
+    depends_on = [module.vpc]
+}
+
+
+
+module "coredns_patching" {
+  source  = "./modules/coredns-patch"
+
+  k8s_cluster_type = var.cluster_type
+  k8s_namespace    = "kube-system"
+  k8s_cluster_name = module.eks.eks_cluster_name
+  user_profile =   var.user_profile
+  user_os = var.user_os
+  depends_on = [module.eks]
+
+}
+
 #
-#
-#module "eks" {
-#    source                              =  "./modules/eks"
-#    cluster_name                        =  var.cluster_name
-#    cluster_version                     =  var.cluster_version
-#    environment                         =  var.environment
-#    #eks_node_group_instance_types       =  var.eks_node_group_instance_types
-#    private_subnets                     =  module.vpc.aws_subnets_private
-#    public_subnets                      =  module.vpc.aws_subnets_public
-#    fargate_app_namespace               =  var.fargate_app_namespace
-#
-#    depends_on = [module.vpc]
-#}
-#
-#
-#
-#module "coredns_patching" {
-#  source  = "./modules/coredns-patch"
-#
-#  k8s_cluster_type = var.cluster_type
-#  k8s_namespace    = "kube-system"
-#  k8s_cluster_name = module.eks.eks_cluster_name
-#  user_profile =   var.user_profile
-#  user_os = var.user_os
-#  depends_on = [module.eks]
-#
-#}
-#
-##
 ##
 #module "aws_alb_controller" {
 #  source  = "./modules/aws-lb-controller"
