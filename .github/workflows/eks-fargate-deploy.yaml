@@ -25,7 +25,7 @@ jobs:
          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
          AWS_TOKEN: ${{ secrets.AWS_TOKEN }}
          AWS_DEFAULT_REGION: eu-west-2
-         AWS_EKS_CLUSTER_NAME: sm-eks-clstr-testing
+         AWS_EKS_CLUSTER_NAME:
     steps:
       - uses: actions/checkout@v2
       - name: Install kubectl
@@ -50,9 +50,13 @@ jobs:
         uses: KJ002/read-yaml@main      # You may wish to replace main with a version tag such as '1.6' etc.
         with:
           file: './env-config.yaml'          # File to read from
-          key-path: '["EKSConfig", "environment", "clusterName"], ["EKSConfig", "environment", "name"]' # Access the runs key then the using key and retuns the value.
+          key-path: '["EKSConfig", "environment", "clusterName"]' # Access the runs key then the using key and retuns the value.
       - name: Display read-yaml output
-        run: echo "${{ steps.yaml-data.outputs.data }}"
+        run: |
+            echo "Config file EKS cluster name: ${{ steps.yaml-data.outputs.data }}"
+            echo "Setting Env variable with EKS cluster name...."
+            echo "AWS_EKS_CLUSTER_NAME=${{ steps.yaml-data.outputs.data }}" >> $GITHUB_ENV
+            echo "Checking EKS Cluster name in env variable: "$AWS_EKS_CLUSTER_NAME
       - name: Format Terraform
         run: terraform fmt
       - name: Terraform Init
