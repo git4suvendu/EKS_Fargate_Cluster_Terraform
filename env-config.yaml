@@ -1,0 +1,4 @@
+EKSConfig:
+  environment:
+      name: "test"
+      clusterName: "sm-eks-clstr-testing"
