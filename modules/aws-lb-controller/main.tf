@@ -30,7 +30,6 @@ resource "aws_iam_policy" "this" {
                  Name = "${var.k8s_cluster_name}-lb_controller-iam"
                 }
   }
-
 resource "aws_iam_role_policy_attachment" "this" {
   policy_arn = aws_iam_policy.this.arn
   role       = aws_iam_role.this.name
